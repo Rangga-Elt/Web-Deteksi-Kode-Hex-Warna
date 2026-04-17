@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Ekstraksi Warna</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Aplikasi Ekstraksi Warna</h1>
+
+        <!-- Form upload gambar -->
+        <form action="/result" method="POST" enctype="multipart/form-data">
+            <div id="file-inputs">
+                <input type="file" name="file" accept="image/*" required>
+            </div>
+            <div class="button-container">
+                <!-- Tombol Tambah Gambar -->
+                <a href="#" class="button" onclick="addFileInput()">Tambah Gambar</a>
+                <!-- Tombol Unggah -->
+                <button type="submit" class="button">Unggah (Deteksi Warna)</button>
+            </div>
+        </form>
+
+        <!-- Menampilkan hasil hanya jika ada gambar -->
+        {% if images %}
+        <h2>Hasil Analisis Warna</h2>
+            <div class="results-container">
+            {% for img in images %}
+                <div class="image-result">
+                <h3>Hasil Gambar {{ loop.index }}</h3>
+                    <img src="{{ url_for('static', filename='uploads/' + img.filename) }}" alt="Gambar {{ loop.index }}" class="image-preview">
+                <h4>Warna yang Terdeteksi:</h4>
+                    <table class="color-table">
+                    <tr>
+                        {% for color in img.colors[:5] %}  <!-- Baris pertama (5 warna) -->
+                            <td class="color-cell">
+                                <div class="color-box" style="background-color: {{ color[0] }};"></div>
+                                <span class="color-text">{{ color[0] }}</span>
+                                <span class="color-percentage">{{ "%.2f"|format(color[1]) }}%</span>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for color in img.colors[5:] %}  <!-- Baris kedua (5 warna) -->
+                            <td class="color-cell">
+                                <div class="color-box" style="background-color: {{ color[0] }};"></div>
+                                <span class="color-text">{{ color[0] }}</span>
+                                <span class="color-percentage">{{ "%.2f"|format(color[1]) }}%</span>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+        <!-- Tombol Reset -->
+        <div class="button-container">
+            <a href="#" class="button" onclick="resetResults()">Reset</a>
+        </div>
+    {% endif %}
+
+    <!-- Tombol Kembali ke Halaman Utama -->
+    <div class="button-container">
+        <a href="{{ url_for('index') }}" class="button">Kembali ke Halaman Utama</a>
+    </div>
+    
+</div>
+
+    <script>
+        // Fungsi untuk menambahkan input file baru
+        function addFileInput() {
+            let fileInputs = document.getElementById("file-inputs");
+            let inputCount = fileInputs.getElementsByTagName("input").length;
+            if (inputCount < 10) { // Maksimal 10 input
+                let newInput = document.createElement("input");
+                newInput.type = "file";
+                newInput.name = "file";
+                newInput.accept = "image/*";
+                newInput.style.width = "calc(50% - 10px)"; // Dua input per baris
+                fileInputs.appendChild(newInput);
+            } else {
+                alert("Maksimal 10 gambar!");
+            }
+        }
+
+       // Fungsi untuk mereset hasil
+        function resetResults() {
+        // Kirim permintaan ke server untuk membersihkan session
+        fetch("/reset", { method: "POST" })
+        .then(response => {
+            if (response.ok) {
+                // Reload halaman tanpa cache
+                window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+            } else {
+                console.error("Gagal mereset session.");
+                alert("Gagal mereset halaman. Silakan coba lagi.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Terjadi kesalahan saat mereset halaman.");
+        });
+    }
+    </script>
+</body>
+</html>
