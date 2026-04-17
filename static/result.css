@@ -1,0 +1,265 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e2f; /* Dark purple background */
+    color: #fff;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 2100px; /* Lebih kecil untuk tampilan yang lebih rapi */
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 50px;
+    animation: fadeIn 2s ease-in-out;
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(111, 0, 219, 0.2); /* Purple transparent */
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 50px; /* Ukuran font sedikit lebih kecil */
+    color: #ffd700; /* Gold text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideIn 1.5s ease-in-out, glow 3s infinite alternate;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 25px; /* Ukuran font sedikit lebih kecil */
+    color: #ffd700; /* Gold text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideIn 1.5s ease-in-out, glow 3s infinite alternate;
+}
+
+h4 {
+    font-size: 25px; /* Ukuran font sedikit lebih kecil */
+    color: #ffd700; /* Gold text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideIn 1.5s ease-in-out, glow 3s infinite alternate;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Add spacing between elements */
+}
+
+#file-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Add spacing between file inputs */
+    justify-content: center;
+    width: 100%;
+}
+
+input[type="file"] {
+    font-size: 20px;
+    padding: 12px;
+    border: 3px solid #ffd700;
+    border-radius: 5px;
+    background-color: #6a0dad;
+    color: #fff;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    width: calc(50% - 10px); /* Two inputs per row */
+}
+
+.button-container {
+    display: flex;
+    gap: 15px; /* Add spacing between buttons */
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styling for all buttons (both <button> and <a>) */
+button,
+a.button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #6a0dad; /* Ungu tua sebagai warna default */
+    color: #ffffff; /* Teks putih */
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 3px solid #ffd700; /* Outline emas */
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1; /* Make buttons the same size */
+    outline: none; /* Remove default focus outline */
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover,
+a.button:hover {
+    background-color: #ffd700; /* Emas saat dihover */
+    color: #1e1e2f; /* Teks gelap */
+    border: 5px solid #6a0dad;
+    transform: translateY(-3px); /* Efek hover naik sedikit */
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3); /* Efek glow */
+}
+
+button:active,
+a.button:active {
+    background-color: #ff8c00; /* Oranye saat diklik */
+    color: #ffffff; /* Teks putih */
+    border-color: #ff8c00; /* Outline oranye */
+    transform: translateY(0); /* Hilangkan efek hover saat diklik */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow saat diklik */
+}
+
+.results-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Add more spacing between image results */
+    justify-content: center;
+    width: 100%; /* Ensure it takes full width */
+    padding: 20px; /* Add padding to make it larger */
+    background-color: rgba(111, 0, 219, 0.2); /* Purple transparent */
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.image-result {
+    background-color: rgba(111, 0, 219, 0.2); /* Purple transparent */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 700px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+    border: 3px solid #ffd700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.image-result:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.image-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 3px solid #ffd700;
+}
+
+.color-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border: 3px solid rgba(255, 215, 0, 0.3); /* Gold border for table */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(255, 215, 0, 0.1); /* Semi-transparent gold background */
+    table-layout: fixed; /* Ensure table cells have consistent width */
+}
+
+.color-cell {
+    padding: 12px;
+    text-align: center;
+    position: relative;
+    border: 3px solid rgba(255, 215, 0, 0.3); /* Gold border for cells */
+    word-wrap: break-word; /* Prevent text overflow */
+}
+
+.color-box {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 8px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite alternate, border-glow 3s infinite alternate;
+    border: 3px solid #1e1e2f; /* Default border color */
+}
+
+.color-text {
+    display: block;
+    font-size: 20px;
+    color: #ffd700;
+}
+
+.color-percentage {
+    display: block;
+    font-size: 20px;
+    color: rgba(255, 215, 0, 0.7);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    to {
+        text-shadow: 4px 4px 8px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/* Animasi untuk border yang berubah-ubah warna */
+@keyframes border-glow {
+    from {
+        border-color: #1e1e2f; /* Warna awal (gelap) */
+    }
+    to {
+        border-color: #fff; /* Warna akhir (putih) */
+    }
+}
